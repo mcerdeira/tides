@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Tides"
+run/main_scene="uid://cdgkhjnam7bxp"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://bsgvt0g6f0him"
+
+[autoload]
+
+Global="*uid://bb8221wc574v8"
+Music="*uid://80nr0w75tbqb"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
