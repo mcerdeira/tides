@@ -1,0 +1,121 @@
+class_name Player
+extends CharacterBody2D
+
+## Monje. Se mueve de a una celda, por "turnos":
+## - Si se presiona la direccion a la que mira: avanza una celda (0.5s).
+## - Si se presiona una direccion perpendicular: rota 90 grados (0.5s), sin avanzar.
+## - Si se presiona la direccion opuesta: retrocede una celda de reversa (0.5s),
+##   sin girar, con el candelabro siempre adelante.
+## Mientras dura una animacion no se acepta ninguna otra accion.
+
+@export var facing: Global.Dir = Global.Dir.RIGHT
+
+var busy := false
+var leaving := false  # true mientras baja por la puerta
+
+const ACTIONS := {
+	"move_right": Global.Dir.RIGHT,
+	"move_down": Global.Dir.DOWN,
+	"move_left": Global.Dir.LEFT,
+	"move_up": Global.Dir.UP,
+}
+
+@onready var pivot: Node2D = $pivot
+@onready var sprite: AnimatedSprite2D = $pivot/sprite
+@onready var candle: Candle = $pivot/Candle
+
+
+func _ready():
+	Global.player = self
+	collision_layer = Global.LAYER_PLAYER
+	collision_mask = Global.LAYER_WALLS | Global.LAYER_CANDLES
+	pivot.rotation = Global.dir_angle(facing)
+	sprite.play("idle")
+	# Resolver la celda inicial del candelabro (por si arranca sobre algo)
+	resolve.call_deferred()
+
+
+func _physics_process(_delta):
+	if busy or leaving:
+		return
+	for action in ACTIONS:
+		if Input.is_action_pressed(action):
+			var dir: Global.Dir = ACTIONS[action]
+			if dir == facing:
+				try_move(dir)
+				return
+			elif Global.is_opposite(dir, facing):
+				try_move(dir)  # reversa
+				return
+			else:
+				try_rotate(dir)
+				return
+
+
+## Avanza (dir == facing) o retrocede de reversa (dir opuesta) una celda.
+## El player y su candelabro deben tener la celda destino libre.
+func try_move(dir: Global.Dir):
+	var motion := Global.dir_vector(dir) * Global.CELL
+	if test_move(global_transform, motion):
+		return
+	if candle.test_move(candle.global_transform, motion):
+		return
+
+	busy = true
+	if dir == facing:
+		sprite.play("walk")
+	else:
+		sprite.play_backwards("walk")
+	var tween := create_tween()
+	tween.tween_property(self, "global_position", global_position + motion, Global.MOVE_TIME)
+	await tween.finished
+	sprite.play("idle")
+	await resolve()
+	busy = false
+
+
+func try_rotate(dir: Global.Dir):
+	# El candelabro describe un arco: pasa por la celda diagonal y termina en
+	# la celda de la nueva direccion. Ambas deben estar libres de paredes.
+	var start := candle.global_position
+	var diagonal := global_position + (Global.dir_vector(facing) + Global.dir_vector(dir)) * Global.CELL
+	var target := global_position + Global.dir_vector(dir) * Global.CELL
+	if candle.test_move(Transform2D(0.0, start), diagonal - start):
+		return
+	if candle.test_move(Transform2D(0.0, diagonal), target - diagonal):
+		return
+
+	busy = true
+	var from_angle := pivot.rotation
+	var delta := wrapf(Global.dir_angle(dir) - from_angle, -PI, PI)
+	var tween := create_tween()
+	tween.tween_property(pivot, "rotation", from_angle + delta, Global.ROTATE_TIME)
+	await tween.finished
+	facing = dir
+	pivot.rotation = Global.dir_angle(dir)
+	await resolve()
+	busy = false
+
+
+## Se llama cada vez que termina un movimiento o rotacion.
+func resolve():
+	# Esperar a que las areas actualicen las superposiciones
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	if not is_inside_tree() or Global.level == null:
+		return
+	candle.check_overlaps()
+	Global.level.update_door()
+	var door = Global.level.get_open_door_under_player()
+	if door:
+		leaving = true
+		door.enter()
+
+
+## Animacion de bajar por la trampilla
+func descend():
+	leaving = true
+	var tween := create_tween().set_parallel(true)
+	tween.tween_property(self, "scale", Vector2(0.2, 0.2), 0.5)
+	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	await tween.finished

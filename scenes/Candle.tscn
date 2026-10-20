@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bvubgb0gr58nh"]
+
+[ext_resource type="Script" uid="uid://bh4knimbl4jw0" path="res://scripts/Candle.gd" id="script"]
+[ext_resource type="Texture2D" uid="uid://dfxs0ppqshel5" path="res://sprites/candle/candle_1_spr.png" id="tex_1"]
+[ext_resource type="Texture2D" uid="uid://ch26rv0q8w3np" path="res://sprites/candle/candle_2_spr.png" id="tex_2"]
+[ext_resource type="Texture2D" uid="uid://dqfei0uobnu1e" path="res://sprites/candle/candle_off_1_spr.png" id="tex_3"]
+
+[sub_resource type="RectangleShape2D" id="body_shape"]
+size = Vector2(24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_2")
+}],
+"loop": 1,
+"name": &"lit",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_3")
+}],
+"loop": 1,
+"name": &"off",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="detector_shape"]
+size = Vector2(16, 16)
+
+[sub_resource type="Gradient" id="light_gradient"]
+colors = PackedColorArray(1, 0.86, 0.6, 1, 1, 0.7, 0.4, 0)
+
+[sub_resource type="GradientTexture2D" id="light_texture"]
+gradient = SubResource("light_gradient")
+width = 224
+height = 224
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="Candle" type="CharacterBody2D" unique_id=1128272766]
+script = ExtResource("script")
+
+[node name="collider" type="CollisionShape2D" parent="." unique_id=651620351]
+shape = SubResource("body_shape")
+
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=104972803]
+sprite_frames = SubResource("SpriteFrames_1")
+animation = &"lit"
+
+[node name="detector" type="Area2D" parent="." unique_id=799675598]
+
+[node name="collider" type="CollisionShape2D" parent="detector" unique_id=617093248]
+shape = SubResource("detector_shape")
+
+[node name="light" type="PointLight2D" parent="." unique_id=471129462]
+color = Color(1, 0.9, 0.7, 1)
+energy = 1.2
+texture = SubResource("light_texture")

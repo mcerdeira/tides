@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://b8ssm4gl26b8a"]
+
+[ext_resource type="Script" uid="uid://bmhu7th0onvl" path="res://scripts/Level.gd" id="1_3825t"]
+[ext_resource type="PackedScene" path="res://scenes/Wall.tscn" id="3_f3pvd"]
+[ext_resource type="PackedScene" path="res://scenes/Door.tscn" id="4_x3k3d"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="5_stl8g"]
+[ext_resource type="PackedScene" uid="uid://bvubgb0gr58nh" path="res://scenes/Candle.tscn" id="6_6qpip"]
+
+[node name="Level1" type="Node2D" unique_id=1127414781]
+script = ExtResource("1_3825t")
+
+[node name="walls" type="Node2D" parent="." unique_id=2068130081]
+
+[node name="Wall1" parent="walls" unique_id=1892606761 instance=ExtResource("3_f3pvd")]
+position = Vector2(-16, -16)
+
+[node name="Wall3" parent="walls" unique_id=445228218 instance=ExtResource("3_f3pvd")]
+position = Vector2(16, -16)
+
+[node name="Wall5" parent="walls" unique_id=477632973 instance=ExtResource("3_f3pvd")]
+position = Vector2(48, -16)
+
+[node name="Wall7" parent="walls" unique_id=969218005 instance=ExtResource("3_f3pvd")]
+position = Vector2(80, -16)
+
+[node name="Wall2" parent="walls" unique_id=1942287478 instance=ExtResource("3_f3pvd")]
+position = Vector2(-16, 48)
+
+[node name="Wall4" parent="walls" unique_id=581707061 instance=ExtResource("3_f3pvd")]
+position = Vector2(16, 80)
+
+[node name="Wall16" parent="walls" unique_id=1938913730 instance=ExtResource("3_f3pvd")]
+position = Vector2(-16, 80)
+
+[node name="Wall6" parent="walls" unique_id=496544581 instance=ExtResource("3_f3pvd")]
+position = Vector2(48, 80)
+
+[node name="Wall8" parent="walls" unique_id=842315452 instance=ExtResource("3_f3pvd")]
+position = Vector2(80, 80)
+
+[node name="Wall15" parent="walls" unique_id=1769920456 instance=ExtResource("3_f3pvd")]
+position = Vector2(112, 80)
+
+[node name="Wall9" parent="walls" unique_id=861618485 instance=ExtResource("3_f3pvd")]
+position = Vector2(112, -16)
+
+[node name="Wall10" parent="walls" unique_id=1318146850 instance=ExtResource("3_f3pvd")]
+position = Vector2(112, 48)
+
+[node name="Wall11" parent="walls" unique_id=1305063232 instance=ExtResource("3_f3pvd")]
+position = Vector2(144, -16)
+
+[node name="Wall12" parent="walls" unique_id=215591128 instance=ExtResource("3_f3pvd")]
+position = Vector2(144, 48)
+
+[node name="Wall13" parent="walls" unique_id=1500847740 instance=ExtResource("3_f3pvd")]
+position = Vector2(-16, 16)
+
+[node name="Wall14" parent="walls" unique_id=1909973748 instance=ExtResource("3_f3pvd")]
+position = Vector2(144, 16)
+
+[node name="Door" parent="." unique_id=890223312 instance=ExtResource("4_x3k3d")]
+position = Vector2(112, 16)
+
+[node name="Player" parent="." unique_id=537437132 instance=ExtResource("5_stl8g")]
+position = Vector2(16, 16)
+
+[node name="Candle" parent="." unique_id=482762905 instance=ExtResource("6_6qpip")]
+position = Vector2(48, 48)
+lit = false

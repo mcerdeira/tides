@@ -1,0 +1,136 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/Wall.gd" id="script"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_fill_1_spr.png" id="tex_fill"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_north_1_spr.png" id="tex_north"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_south_1_spr.png" id="tex_south"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_west_1_spr.png" id="tex_west"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_east_1_spr.png" id="tex_east"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_corner_nw_1_spr.png" id="tex_corner_nw"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_corner_ne_1_spr.png" id="tex_corner_ne"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_corner_sw_1_spr.png" id="tex_corner_sw"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_corner_se_1_spr.png" id="tex_corner_se"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_convex_nw_1_spr.png" id="tex_convex_nw"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_convex_ne_1_spr.png" id="tex_convex_ne"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_convex_sw_1_spr.png" id="tex_convex_sw"]
+[ext_resource type="Texture2D" path="res://sprites/wall/wall_convex_se_1_spr.png" id="tex_convex_se"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_fill")
+}],
+"loop": true,
+"name": &"fill",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_north")
+}],
+"loop": true,
+"name": &"north",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_south")
+}],
+"loop": true,
+"name": &"south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_west")
+}],
+"loop": true,
+"name": &"west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_east")
+}],
+"loop": true,
+"name": &"east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_corner_nw")
+}],
+"loop": true,
+"name": &"corner_nw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_corner_ne")
+}],
+"loop": true,
+"name": &"corner_ne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_corner_sw")
+}],
+"loop": true,
+"name": &"corner_sw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_corner_se")
+}],
+"loop": true,
+"name": &"corner_se",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_convex_nw")
+}],
+"loop": true,
+"name": &"convex_nw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_convex_ne")
+}],
+"loop": true,
+"name": &"convex_ne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_convex_sw")
+}],
+"loop": true,
+"name": &"convex_sw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_convex_se")
+}],
+"loop": true,
+"name": &"convex_se",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(32, 32)
+
+[node name="Wall" type="StaticBody2D"]
+script = ExtResource("script")
+
+[node name="collider" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1")
+animation = &"fill"
