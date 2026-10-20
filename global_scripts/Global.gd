@@ -4,8 +4,9 @@ var GAMEOVER = false
 
 # ---------------- Grilla y tiempos ----------------
 const CELL := 32
-const MOVE_TIME := 0.5     # duracion de un paso (segundos)
-const ROTATE_TIME := 0.5   # duracion de una rotacion (segundos)
+const MOVE_TIME := 0.2   # duracion de un paso (segundos)
+const ROTATE_TIME := 0.2   # duracion de una rotacion (segundos)
+const GRAB_TIME := 0.2   # duracion del feedback al agarrar / soltar el candelabro (segundos)
 
 # ---------------- Direcciones ----------------
 enum Dir { RIGHT, DOWN, LEFT, UP }

@@ -64,11 +64,11 @@ position = Vector2(144, 16)
 position = Vector2(112, 16)
 
 [node name="Player" parent="." unique_id=537437132 instance=ExtResource("4_r415l")]
-position = Vector2(16, 16)
+position = Vector2(48, 16)
 
 [node name="Candle" parent="." unique_id=482762905 instance=ExtResource("5_rgf08")]
 position = Vector2(48, 48)
 lit = false
 
 [node name="Drip" parent="." unique_id=1348011831 instance=ExtResource("6_g13nb")]
-position = Vector2(80, 48)
+position = Vector2(16, 16)

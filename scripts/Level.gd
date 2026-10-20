@@ -8,7 +8,10 @@ extends Node2D
 func _ready():
 	Global.level = self
 	update_door.call_deferred()
-
+	
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("SKIP_LEVEL"):
+		Global.next_level()
 
 ## Abre las puertas si todos los candelabros estan encendidos (incluido el nuestro)
 func update_door():
@@ -18,6 +21,14 @@ func update_door():
 			all_lit = false
 	for door in get_tree().get_nodes_in_group("doors"):
 		door.set_open(all_lit)
+
+
+## Devuelve el candelabro apoyado en el nivel (no el del player) en esa celda
+func get_candle_at(cell: Vector2i) -> Candle:
+	for candle in get_tree().get_nodes_in_group("candles"):
+		if not candle.held and Global.pos_to_cell(candle.global_position) == cell:
+			return candle
+	return null
 
 
 ## Devuelve la puerta ABIERTA donde esta parado el player (las cerradas no cuentan)

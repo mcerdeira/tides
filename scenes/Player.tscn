@@ -1,11 +1,14 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dlurhsf84w1ye"]
 
-[ext_resource type="Script" path="res://scripts/Player.gd" id="script"]
-[ext_resource type="PackedScene" path="res://scenes/Candle.tscn" id="candle"]
-[ext_resource type="Texture2D" path="res://sprites/player/player_1_spr.png" id="tex_1"]
-[ext_resource type="Texture2D" path="res://sprites/player/player_2_spr.png" id="tex_2"]
-[ext_resource type="Texture2D" path="res://sprites/player/player_walk_1_spr.png" id="tex_3"]
-[ext_resource type="Texture2D" path="res://sprites/player/player_walk_2_spr.png" id="tex_4"]
+[ext_resource type="PackedScene" uid="uid://bvubgb0gr58nh" path="res://scenes/Candle.tscn" id="candle"]
+[ext_resource type="Script" uid="uid://0x0f7riqaw86" path="res://scripts/Player.gd" id="script"]
+[ext_resource type="Texture2D" uid="uid://bdooky0qfjovt" path="res://sprites/player/player_1_spr.png" id="tex_1"]
+[ext_resource type="Texture2D" uid="uid://bptytxej330a" path="res://sprites/player/player_2_spr.png" id="tex_2"]
+[ext_resource type="Texture2D" uid="uid://b6kamg3ijma3d" path="res://sprites/player/player_walk_1_spr.png" id="tex_3"]
+[ext_resource type="Texture2D" uid="uid://cfaju6serfyih" path="res://sprites/player/player_walk_2_spr.png" id="tex_4"]
+
+[sub_resource type="RectangleShape2D" id="body_shape"]
+size = Vector2(24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1"]
 animations = [{
@@ -16,7 +19,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("tex_2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 2.0
 }, {
@@ -27,27 +30,24 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("tex_4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="body_shape"]
-size = Vector2(24, 24)
-
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=552912260]
 motion_mode = 1
 script = ExtResource("script")
 
-[node name="collider" type="CollisionShape2D" parent="."]
+[node name="collider" type="CollisionShape2D" parent="." unique_id=896693849]
 shape = SubResource("body_shape")
 
-[node name="pivot" type="Node2D" parent="."]
+[node name="pivot" type="Node2D" parent="." unique_id=937822016]
 
-[node name="sprite" type="AnimatedSprite2D" parent="pivot"]
+[node name="sprite" type="AnimatedSprite2D" parent="pivot" unique_id=190039843]
 sprite_frames = SubResource("SpriteFrames_1")
 animation = &"idle"
 
-[node name="Candle" parent="pivot" instance=ExtResource("candle")]
+[node name="Candle" parent="pivot" unique_id=1569548098 instance=ExtResource("candle")]
 position = Vector2(32, 0)
 held = true

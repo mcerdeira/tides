@@ -18,7 +18,7 @@ position = Vector2(-16, -16)
 position = Vector2(16, -16)
 
 [node name="Wall5" parent="walls" unique_id=477632973 instance=ExtResource("2_btbtd")]
-position = Vector2(48, -16)
+position = Vector2(16, -48)
 
 [node name="Wall7" parent="walls" unique_id=969218005 instance=ExtResource("2_btbtd")]
 position = Vector2(80, -48)
@@ -69,7 +69,7 @@ position = Vector2(144, 16)
 position = Vector2(112, 16)
 
 [node name="Player" parent="." unique_id=537437132 instance=ExtResource("4_rrgde")]
-position = Vector2(16, 16)
+position = Vector2(16, 48)
 
 [node name="Candle" parent="." unique_id=482762905 instance=ExtResource("5_reskh")]
 position = Vector2(112, -16)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://co4ocj2urvqew"]
 
 [ext_resource type="PackedScene" path="res://scenes/Door.tscn" id="door"]
-[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="player"]
+[ext_resource type="PackedScene" uid="uid://dlurhsf84w1ye" path="res://scenes/Player.tscn" id="player"]
 [ext_resource type="Script" uid="uid://bmhu7th0onvl" path="res://scripts/Level.gd" id="script"]
 [ext_resource type="PackedScene" path="res://scenes/Wall.tscn" id="wall"]
 
